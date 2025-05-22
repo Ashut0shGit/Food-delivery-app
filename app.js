@@ -1,17 +1,20 @@
-const parent = React.createElement("div" , {id:"parent"} , 
-    [React.createElement("div" , 
-        {id :"child"} , 
-        [React.createElement("h1" , {} , "I'm h1 tag !"), 
-        React.createElement("h2" , {} , "I'm h2 tag !")]
-    ) , 
-    React.createElement("div" , 
-        {id :"child"} , 
-        [React.createElement("h1" , {} , "I'm h1 tag !"), 
-        React.createElement("h2" , {} , "I'm h2 tag !")]
-    )]
-)
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-console.log(parent); //object
+// React.createElement => React element(object) => HTML render
+// JSX => BABEL => Javascript
+
+const Heading = () => <h1>Namaste React using JSX 🚀</h1>;
+
+//React Functional component
+
+const HeadingComponent = () => (
+  <div id="container">
+    <Heading />
+    <h1> Namaste React functional component</h1>
+  </div>
+);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-        
-root.render(parent);
+
+root.render(<HeadingComponent />);
