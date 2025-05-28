@@ -80,3 +80,48 @@
 .filter-btn:hover {
   background-color: #45a049;
 }
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.shimmer-card {
+  width: 210px;
+  height: 320px;
+  margin: 12px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background-color: #f6f7f8;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150px;
+  width: 150px;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(246, 247, 248, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(246, 247, 248, 0) 100%
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150px;
+  }
+  100% {
+    left: 100%;
+  }
+}
