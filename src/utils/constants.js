@@ -3,3 +3,6 @@ export const CDN_URL =
 
 export const LOGO_URL =
   "https://png.pngtree.com/png-clipart/20241007/original/pngtree-free-food-delivery-logo-template-png-image_16223989.png";
+
+export const MENU_API =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.7711858&lng=86.2439004&restaurantId=";
