@@ -2,6 +2,8 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { RESTAURANT_LIST_API } from "../utils/constants.js";
+
 const Body = () => {
   let [filteredList, setFilteredList] = useState([]);
   let [allRestaurants, setAllRestaurants] = useState([]);
@@ -12,18 +14,19 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7711858&lng=86.2439004&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(RESTAURANT_LIST_API);
 
     const json = await data.json();
     console.log(json);
-    setFilteredList(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+
+    const restaurantCard = json?.data?.cards?.find(
+      (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    setAllRestaurants(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+
+    const restaurantCards =
+      restaurantCard.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+    setFilteredList(restaurantCards);
+    setAllRestaurants(restaurantCards);
   };
 
   return !filteredList?.length ? (
@@ -77,14 +80,16 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredList.map((restaurant) => (
-          <Link
-            key={restaurant.info.id}
-            to={"/restaurant/" + restaurant.info.id}
-          >
-            <RestaurantCard resData={restaurant} />
-          </Link>
-        ))}
+        {filteredList
+          // .filter((restaurant) => restaurant && restaurant.info)
+          .map((restaurant) => (
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurant/" + restaurant.info.id}
+            >
+              <RestaurantCard resData={restaurant} />
+            </Link>
+          ))}
       </div>
     </div>
   );

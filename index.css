@@ -194,3 +194,8 @@
   background-color: #43a047;
   transform: translateY(-1px);
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import { MENU_API } from "../utils/constants";
+import "./RestaurantMenu.css";
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
 
@@ -31,32 +32,67 @@ const RestaurantMenu = () => {
     areaName,
     city,
     costForTwoMessage,
-  } = resInfo?.cards[2]?.card?.card?.info || {};
+  } = resInfo?.cards.find((card) => card?.card?.card?.info).card?.card?.info ||
+  {};
 
-  const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card;
+  const itemCards =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.find(
+      (c) => c?.card?.card?.itemCards
+    )?.card?.card?.itemCards;
 
   console.log(itemCards);
 
   return (
     <div className="restaurant-menu">
-      <h1>{name}</h1>
-      <p> {cuisines.join(", ")}</p>
-      <p> {costForTwoMessage}</p>
-      <p>{avgRatingString} ⭐</p>
-      <p>
-        {locality}, {areaName}, {city}
-      </p>
+      <div className="restaurant-header">
+        <div className="restaurant-header-left">
+          <h2 className="restaurant-name">{name}</h2>
+          <p className="restaurant-cuisines">{cuisines.join(", ")}</p>
+          <p className="restaurant-location">
+            {locality}, {areaName}, {city}
+          </p>
+        </div>
+        <div className="restaurant-rating-box">
+          <p className="restaurant-rating">{avgRatingString} ⭐</p>
+        </div>
+      </div>
 
-      <h2>Menu</h2>
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} -{"  Rs.  "}
-            {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-          </li>
-        ))}
-      </ul>
+      <div className="restaurant-cost">{costForTwoMessage}</div>
+
+      <hr />
+      <h2 className="menu-heading">Menu</h2>
+
+      <div className="menu-container">
+        {itemCards?.map((item) => {
+          const info = item.card.info;
+          const isVeg = info.itemAttribute?.vegClassifier === "VEG";
+          const price = info.price / 100 || info.defaultPrice / 100;
+
+          return (
+            <div key={info.id} className="menu-card">
+              <div className="menu-card-details">
+                <div className="veg-icon">
+                  <span className={isVeg ? "dot veg" : "dot non-veg"}></span>
+                </div>
+                <h3 className="menu-name">{info.name}</h3>
+                <p className="menu-price">₹{price}</p>
+                <p className="menu-desc">{info.description}</p>
+                <button className="add-btn">Add +</button>
+              </div>
+
+              {info.imageId && (
+                <div className="menu-image-wrapper">
+                  <img
+                    src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_100/${info.imageId}`}
+                    alt={info.name}
+                    className="menu-img"
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
