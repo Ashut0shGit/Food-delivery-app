@@ -51,13 +51,12 @@ const RestaurantMenu = () => {
           <p className="restaurant-location">
             {locality}, {areaName}, {city}
           </p>
+          <h3 className="restaurant-cost">{costForTwoMessage}</h3>
         </div>
         <div className="restaurant-rating-box">
           <p className="restaurant-rating">{avgRatingString} ⭐</p>
         </div>
       </div>
-
-      <div className="restaurant-cost">{costForTwoMessage}</div>
 
       <hr />
       <h2 className="menu-heading">Menu</h2>
