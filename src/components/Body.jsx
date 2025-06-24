@@ -80,16 +80,14 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredList
-          // .filter((restaurant) => restaurant && restaurant.info)
-          .map((restaurant) => (
-            <Link
-              key={restaurant.info.id}
-              to={"/restaurant/" + restaurant.info.id}
-            >
-              <RestaurantCard resData={restaurant} />
-            </Link>
-          ))}
+        {filteredList.map((restaurant) => (
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurant/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
+        ))}
       </div>
     </div>
   );
