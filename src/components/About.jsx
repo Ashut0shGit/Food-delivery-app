@@ -12,8 +12,8 @@ class About extends Component {
 
   render() {
     return (
-      <div>
-        <h1> About Us </h1>
+      <div className="m-4 p-4">
+        <h1 className="text-3xl font-bold "> About Us </h1>
         <UserClass name={" "} location={""} />
       </div>
     );

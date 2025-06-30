@@ -43,8 +43,8 @@ const Body = () => {
         <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box border border-solid border-black p-1"
-            placeholder="Search Restaurants"
+            className="search-box border border-solid border-black p-1 rounded-lg italic"
+            placeholder="Search Restaurants..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />

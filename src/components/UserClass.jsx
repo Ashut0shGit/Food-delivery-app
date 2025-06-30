@@ -33,11 +33,13 @@ class UserClass extends Component {
   render() {
     const { name, location, avatar_url } = this.state.userInfo;
     return (
-      <div className="user-card">
-        <img src={avatar_url} className="profile-img" alt={name} />
-        <h3> Name : {name}</h3>
-        <h3> Location : {location}</h3>
-        <h3> Email : ashutosh75jsr@gmail.com</h3>
+      <div className="user-card m-4 p-4 w-[300px] rounded-lg shadow-lg bg-gray-100">
+        <img src={avatar_url} className="profile-img w-[300px]" alt={name} />
+        <div className="m-4 p-4">
+          <h3> Name : {name}</h3>
+          <h3> Location : {location}</h3>
+          <h3> Email : ashutosh75jsr@gmail.com</h3>
+        </div>
       </div>
     );
   }
