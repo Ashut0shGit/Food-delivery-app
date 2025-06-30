@@ -33,12 +33,25 @@ class UserClass extends Component {
   render() {
     const { name, location, avatar_url } = this.state.userInfo;
     return (
-      <div className="user-card m-4 p-4 w-[300px] rounded-lg shadow-lg bg-gray-100">
-        <img src={avatar_url} className="profile-img w-[300px]" alt={name} />
-        <div className="m-4 p-4">
-          <h3> Name : {name}</h3>
-          <h3> Location : {location}</h3>
-          <h3> Email : ashutosh75jsr@gmail.com</h3>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+        <img
+          src={avatar_url}
+          className="profile-img w-[300px] h-[300px]  rounded-full object-cover shadow-2xl transition transform hover:scale-110 duration-500"
+          alt={name}
+        />
+        <div className="m-4 p-6 bg-gray-200 rounded-xl shadow-2xl transition transform hover:scale-105 hover:rotate-1 duration-500">
+          <h3 className="text-xl font-semibold text-gray-800 animate-fade-in delay-100">
+            {" "}
+            Name : <span className="text-indigo-600"></span> {name}
+          </h3>
+          <h3 className="text-xl font-semibold text-gray-800 animate-fade-in delay-200">
+            {" "}
+            Location : {location}
+          </h3>
+          <h3 className="text-xl font-semibold text-gray-800 animate-fade-in delay-300">
+            {" "}
+            Email : ashutosh75jsr@gmail.com
+          </h3>
         </div>
       </div>
     );

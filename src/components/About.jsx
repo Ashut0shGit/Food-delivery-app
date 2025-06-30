@@ -13,7 +13,7 @@ class About extends Component {
   render() {
     return (
       <div className="m-4 p-4">
-        <h1 className="text-3xl font-bold "> About Us </h1>
+        <h1 className="text-2xl font-bold "> About Us </h1>
         <UserClass name={" "} location={""} />
       </div>
     );
