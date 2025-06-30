@@ -39,17 +39,17 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="search-box border border-solid border-black p-1"
             placeholder="Search Restaurants"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
           <button
-            className="search-btn"
+            className="px-4 py-2 m-4 bg-green-100 rounded-lg hover:bg-green-200 cursor-pointer"
             onClick={() => {
               const filteredRestaurants = allRestaurants.filter((res) => {
                 return res.info.name
@@ -60,32 +60,35 @@ const Body = () => {
               setFilteredList(filteredRestaurants);
             }}
           >
-            🔍
+            Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            let topRated = filteredList.filter(
-              (res) => res.info.avgRating > 4.5
-            );
-            setFilteredList(topRated);
-          }}
-        >
-          {" "}
-          Top Rated Restaurants
-        </button>
-
-        <button
-          className="filter-btn"
-          onClick={() => {
-            setFilteredList(allRestaurants);
-          }}
-        >
-          Show All
-        </button>
+        <div className="m-4 p-4 flex items-center">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 cursor-pointer"
+            onClick={() => {
+              let topRated = filteredList.filter(
+                (res) => res.info.avgRating > 4.5
+              );
+              setFilteredList(topRated);
+            }}
+          >
+            {" "}
+            Top Rated Restaurants
+          </button>
+        </div>
+        <div className="m-4 p-4 flex items-center">
+          <button
+            className="filter-btn px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 cursor-pointer"
+            onClick={() => {
+              setFilteredList(allRestaurants);
+            }}
+          >
+            Show All
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap">
         {filteredList.map((restaurant) => (
           <Link
             key={restaurant.info.id}
