@@ -1,7 +1,7 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import "./RestaurantMenu.css";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -14,6 +14,7 @@ const RestaurantMenu = () => {
     name,
     cuisines = [],
     avgRatingString,
+    totalRatingsString,
     locality,
     areaName,
     city,
@@ -26,58 +27,44 @@ const RestaurantMenu = () => {
       (c) => c?.card?.card?.itemCards
     )?.card?.card?.itemCards;
 
-  console.log(itemCards);
+  console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
+
+  const categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
   return (
-    <div className="restaurant-menu">
-      <div className="restaurant-header">
-        <div className="restaurant-header-left">
-          <h2 className="restaurant-name">{name}</h2>
-          <p className="restaurant-cuisines">{cuisines.join(", ")}</p>
-          <p className="restaurant-location">
-            {locality}, {areaName}, {city}
-          </p>
-          <h3 className="restaurant-cost">{costForTwoMessage}</h3>
-        </div>
-        <div className="restaurant-rating-box">
-          <p className="restaurant-rating">{avgRatingString} ⭐</p>
-        </div>
+    <div className="text-center">
+      <h2 className="font-bold my-6 text-2xl">{name}</h2>
+
+      <div className="flex justify-center items-center gap-2 text-sm font-bold text-gray-600">
+        <span className="text-sm font-bold text-white bg-green-600 px-2 py-1 rounded-md flex items-center">
+          <span className="mr-1 text-sm">★</span>
+          {avgRatingString}
+        </span>
+
+        <span>({totalRatingsString})</span>
+        <span className="text-lg font-bold text-gray-400">•</span>
+        <span>{costForTwoMessage}</span>
       </div>
 
-      <hr />
-      <h2 className="menu-heading">Menu</h2>
-
-      <div className="menu-container">
-        {itemCards?.map((item) => {
-          const info = item.card.info;
-          const isVeg = info.itemAttribute?.vegClassifier === "VEG";
-          const price = info.price / 100 || info.defaultPrice / 100;
-
-          return (
-            <div key={info.id} className="menu-card">
-              <div className="menu-card-details">
-                <div className="veg-icon">
-                  <span className={isVeg ? "dot veg" : "dot non-veg"}></span>
-                </div>
-                <h3 className="menu-name">{info.name}</h3>
-                <p className="menu-price">₹{price}</p>
-                <p className="menu-desc">{info.description}</p>
-                <button className="add-btn">Add +</button>
-              </div>
-
-              {info.imageId && (
-                <div className="menu-image-wrapper">
-                  <img
-                    src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_100/${info.imageId}`}
-                    alt={info.name}
-                    className="menu-img"
-                  />
-                </div>
-              )}
-            </div>
-          );
-        })}
+      <div className="">
+        <p className="font-bold text-orange-600 underline">
+          {cuisines.join(", ")}
+        </p>
+        {/* <p className="restaurant-location font-semibold text-gray-600">
+          {locality}, {areaName}, {city}
+        </p> */}
       </div>
+      {categories?.map((category) => (
+        <RestaurantCategory
+          data={category?.card?.card}
+          key={category?.card?.card?.title}
+        />
+      ))}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -10,15 +10,18 @@ const Body = () => {
   let [allRestaurants, setAllRestaurants] = useState([]);
   let [searchText, setSearchText] = useState("");
 
+  console.log(allRestaurants);
+
   useEffect(() => {
     fetchData();
   }, []);
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   const fetchData = async () => {
     const data = await fetch(RESTAURANT_LIST_API);
 
     const json = await data.json();
-    console.log(json);
 
     const restaurantCard = json?.data?.cards?.find(
       (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -94,7 +97,11 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurant/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.promoted ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
