@@ -1,12 +1,9 @@
 import ItemList from "./ItemList";
-import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-const RestaurantCategory = ({ data }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const RestaurantCategory = ({ data, showItem, setShowIndex }) => {
   const clickHandler = () => {
-    setIsOpen(!isOpen);
+    setShowIndex();
   };
 
   return (
@@ -21,7 +18,7 @@ const RestaurantCategory = ({ data }) => {
             {data?.title} ({data?.itemCards?.length})
           </span>
           <span>
-            {isOpen ? (
+            {showItem ? (
               <ChevronUp className="w-5 h-5" />
             ) : (
               <ChevronDown className="w-5 h-5" />
@@ -29,7 +26,7 @@ const RestaurantCategory = ({ data }) => {
           </span>
         </div>
 
-        {isOpen && <ItemList items={data?.itemCards} />}
+        {showItem && <ItemList items={data?.itemCards} />}
       </div>
       {/* Item List */}
     </div>

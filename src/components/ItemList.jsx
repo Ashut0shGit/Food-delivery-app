@@ -30,8 +30,9 @@ const ItemList = ({ items }) => {
                 {item?.card?.info?.name}
               </h3>
               <p className="text-sm text-gray-600">
-                {" "}
-                ₹ {item?.card?.info?.price / 100}
+                ₹
+                {(item?.card?.info?.price ?? item?.card?.info?.defaultPrice) /
+                  100}
               </p>
             </div>
             <p className="text-xs text-gray-500 line-clamp-3">
@@ -46,7 +47,7 @@ const ItemList = ({ items }) => {
             />
 
             <div className="bottom-0 left-0 w-full">
-              <button className="w-full py-2 bg-white text-green-600 font-semibold text-sm border-t border-gray-200 hover:bg-gray-50">
+              <button className="w-full py-2 bg-white text-green-600 font-semibold text-sm border-t border-gray-200 hover:bg-gray-50 cursor-pointer">
                 ADD +
               </button>
             </div>
