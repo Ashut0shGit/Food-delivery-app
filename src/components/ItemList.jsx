@@ -35,7 +35,7 @@ const ItemList = ({ items }) => {
                   100}
               </p>
             </div>
-            <p className="text-xs text-gray-500 line-clamp-3">
+            <p className="text-xs text-gray-500 ">
               {item?.card?.info?.description}
             </p>
           </div>

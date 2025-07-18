@@ -1,14 +1,17 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { RESTAURANT_LIST_API } from "../utils/constants.js";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import UserContext from "../utils/UserContext.js";
 
 const Body = () => {
   let [filteredList, setFilteredList] = useState([]);
   let [allRestaurants, setAllRestaurants] = useState([]);
   let [searchText, setSearchText] = useState("");
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   console.log(allRestaurants);
 
@@ -46,7 +49,7 @@ const Body = () => {
         <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box border border-solid border-black p-1 rounded-lg italic"
+            className="search-box border border-solid border-black p-2 rounded-lg italic"
             placeholder="Search Restaurants..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -89,6 +92,14 @@ const Body = () => {
           >
             Show All
           </button>
+        </div>
+        <div className="m-4 p-4 flex items-center">
+          <label className="p-2"> UserName : </label>
+          <input
+            className="border border-solid border-black p-1 rounded-lg p-2 "
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="res-container flex flex-wrap">
