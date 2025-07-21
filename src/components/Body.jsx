@@ -69,7 +69,7 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="m-4 p-4 flex items-center">
+        <div className="top-rated m-4 p-4 flex items-center">
           <button
             className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 cursor-pointer"
             onClick={() => {
@@ -83,7 +83,7 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
-        <div className="m-4 p-4 flex items-center">
+        <div className="show-all m-4 p-4 flex items-center">
           <button
             className="filter-btn px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 cursor-pointer"
             onClick={() => {
@@ -96,7 +96,7 @@ const Body = () => {
         <div className="m-4 p-4 flex items-center">
           <label className="p-2"> UserName : </label>
           <input
-            className="border border-solid border-black p-1 rounded-lg p-2 "
+            className="border border-solid border-black rounded-lg p-2 "
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
           />

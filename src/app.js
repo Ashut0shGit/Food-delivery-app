@@ -10,7 +10,8 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
 import { useState, useEffect } from "react";
-
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 // React.createElement => React element(object) => HTML render
 // JSX => BABEL => Javascript
 
@@ -29,12 +30,14 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <div className="app">
-        <HeadingComponent />
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <HeadingComponent />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
