@@ -1,11 +1,19 @@
 import { CDN_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const ItemList = ({ items }) => {
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item?.card?.info?.name));
+  };
+
   return (
     <div className="mt-4">
       {items.map((item, index) => (
         <div
-          key={item?.card?.info?.id}
+          key={item?.card?.info?.id || index}
           className="p-4 mb-4 border-gray-200 border-b-2 text-left flex justify-between items-start"
         >
           <div className="w-3/4 pr-4">
@@ -47,7 +55,10 @@ const ItemList = ({ items }) => {
             />
 
             <div className="bottom-0 left-0 w-full">
-              <button className="w-full py-2 bg-white text-green-600 font-semibold text-sm border-t border-gray-200 hover:bg-gray-50 cursor-pointer">
+              <button
+                className="w-full py-2 bg-white text-green-600 font-semibold text-sm border-t border-gray-200 hover:bg-gray-50 cursor-pointer"
+                onClick={() => handleAddItem(item)}
+              >
                 ADD +
               </button>
             </div>

@@ -13,6 +13,7 @@ const HeadingComponent = () => {
   const { loggedInUser } = useContext(UserContext);
 
   const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
@@ -35,7 +36,7 @@ const HeadingComponent = () => {
             <Link to="/grocery">Grocery Store</Link>
           </li>
           <li className="px-4 font-bold text-xl">
-            🛒 ({cartItems.length} items)
+            <Link to="/cart">🛒 ({cartItems.length} items)</Link>
           </li>
           <button
             className=""
