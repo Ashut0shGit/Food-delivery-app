@@ -12,7 +12,7 @@ import UserContext from "./utils/UserContext";
 import { useState, useEffect } from "react";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
-import Cart from "./components/Cart";
+import Cart from "./components/Cart.jsx";
 // React.createElement => React element(object) => HTML render
 // JSX => BABEL => Javascript
 
