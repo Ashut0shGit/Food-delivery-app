@@ -9,6 +9,16 @@ const cartSlice = createSlice({
 
   reducers: {
     addItem: (state, action) => {
+      // Vanilla Redux => DONT MUTATE STATE
+
+      // const newState = [...state]
+      // newState.items.push(action.payload)
+      // return newState
+
+      // Redux Toolkit => HAVE to mutate state
+      // state.items.push(action.payload)
+      // Redux toolkit uses Immer under the hood to allow us to mutate the state directly
+
       state.items.push(action.payload);
     },
 
