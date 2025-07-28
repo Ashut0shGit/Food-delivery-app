@@ -21,6 +21,11 @@
   },
   "homepage": "https://github.com/Ashut0shGit/Learning-Reactjs#readme",
   "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@testing-library/react": "^16.3.0",
+    "babel-jest": "^30.0.5",
+    "jest": "^30.0.5",
     "parcel": "^2.15.1",
     "prettier": "3.5.3"
   },
